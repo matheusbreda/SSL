@@ -1,0 +1,47 @@
+-video guia: https://www.youtube.com/watch?v=28nQqJkdl6k&t=183s
+
+1-ative o keytool no seu prompt de comando (voce pode testar se o Keytool esta ativado com o comando "keytool" no prompt de comando)
+1.1-copie o caminho do arquivo Keytool (normalmente esse arquivo ja vem junto com o java jdk e seu caminho padrao é: C:\Program Files\Java\jdk-22\bin)
+1.2-acesse as Propriedades do Sistema (Configurações >> Sistema >> Sobre)
+1.3-acesse Configurações Avançadas do Sistema
+1.4-acesse Variaveis de Ambiente(Environment Variables)
+1.5-em Variaveis do Sistema, acesse Path
+1.6-clique em New e cole o caminho do arquivo Keytool
+1.7-clique em Ok e reinicie o computador
+1.8-teste se o keytool esta ativado (voce pode testar se o Keytool esta ativado com o comando "keytool" no prompt de comando)
+2-utilize o comando a seguir para criar seu arquivo keytool: keytool -genkey -v -keystore "nome do arquivo".keystore -alias "apelido do arquivo" -keyalg RSA -keysize 2048 -validity 10000
+2.1- Exemplo: keytool -genkey -v -keystore testehttps.keystore -alias testehttps -keyalg RSA -keysize 2048 -validity 10000
+2.2- responda um pequeno questionario(exemplo):
+	Enter keystore password:
+	"123456"
+	Re-enter new password:
+	"123456"
+	What is your first and last name?
+	"matheus"
+	What is the name of your organizational unit?
+	"testehttps"
+	What is the name of your organization?
+	"testehttps"
+	What is the name of your City or Locality?
+	"maringa"
+	What is the name of your State or Province?
+	"parana"
+	What is the two-letter country code for this unit?
+	"br"
+	Is CN=matheus, OU=testehttps, O=teste, L=maringa, ST=parana, C=br correct?
+	"yes"
+2.3-um arquivo keytool vai ser gerado no caminho em que voce executou o comando (exemplo: C:\Users\Matheus>)
+3-copie seu arquivo keytool
+4-abra seu arquivo backend
+5-cole o arquivo keytool dentro de: src/main/resources
+6-em src/main/resources, acesse: application.properties, adicione as linhas:
+	server.ssl.enabled=true
+	server.ssl.key-store=classpath:"nome do arquivo".keystore
+	server.ssl.key-store-password="senha"
+	server.ssl.key-store-type=PKCS12
+6.1-exemplo:
+	server.ssl.enabled=true
+	server.ssl.key-store=classpath:testehttps.keystore
+	server.ssl.key-store-password=123456
+	server.ssl.key-store-type=PKCS12
+7-Teste
